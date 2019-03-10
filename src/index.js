@@ -1,12 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import {Provider} from 'react-redux'
+import {Router} from 'react-router-dom'
+import createHistory  from 'history/createBrowserHistory'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import  configureStore from './redux/store/configurestore'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const theme = createMuiTheme({
+    palette: {
+        primary: deepPurple,
+        secondary: {
+          main: '#f48fb1',
+        },
+        useNextVariants: true
+      },
+});
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+const history = createHistory(); 
+const store = configureStore(); 
+
+const app =(
+        <Provider store={store}>
+            <Router history={history}>
+            <MuiThemeProvider theme={theme}>
+                 <App/>
+             </MuiThemeProvider>
+            </Router>
+        </Provider>
+    )
+
+ReactDOM.render(app, document.getElementById('root'));
+
 serviceWorker.unregister();

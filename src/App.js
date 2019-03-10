@@ -1,28 +1,34 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import {  Link } from "react-router-dom";
+import Layout from './components/layout/layout'
+import NavbarComponent from './components/nav/nav'
+import RouteComponent from './route/route'
+import Grid from '@material-ui/core/Grid';
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      spacing={40}
+       >
+       <Grid item xs={12}>
+      <h1>Hello world</h1>
+      <NavbarComponent/>
+       </Grid>
+      <Grid item xs={8}>
+          <RouteComponent/>
+      </Grid>
+    </Grid> 
+     );
   }
 }
 
 export default App;
+
+
+
+ 
