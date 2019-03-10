@@ -1,18 +1,24 @@
 import React, {Component} from 'react';
+const google = window.google; 
 
 const style ={
     listStyle: 'none'
 }
-class AutoComplete extends Component {
+class AutoCompleteComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-         placename: ''
+         placename: '',
+         autocomplete: '', 
         };
     }
 
     componentDidMount(){
-        
+        this.setState({
+            ...this.state,
+            /*autocomplete: new google.maps.places.AutoComplete(
+                this.state.placename,{type: ['geocode']*/
+            })
     }
     
     handleChange =(e)=>{
@@ -38,4 +44,4 @@ class AutoComplete extends Component {
     }
 }
 
-export default AutoComplete;
+export default AutoCompleteComponent;

@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Grid from '@material-ui/core/Grid';
 
 
 const flexContainer = {
@@ -14,6 +15,7 @@ const flexContainer = {
 
 const NavbarComponent =()=> {
         return (
+        <Grid item xs={12}>
          <AppBar>
             <Toolbar>
               <List component="nav" style={flexContainer}>
@@ -24,6 +26,7 @@ const NavbarComponent =()=> {
               </List>
             </Toolbar>         
         </AppBar> 
+        </Grid>
         );
     }
 

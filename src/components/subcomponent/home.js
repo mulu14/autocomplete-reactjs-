@@ -1,7 +1,7 @@
 import React , {Component} from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
-import AutoComplete from './autocomplete'
+import AutoCompleteComponent from './autocomplete'
 
 const style ={
     listStyle: 'none'
@@ -29,7 +29,9 @@ class Home extends Component {
     render() {
         return (
             <div>
-              <AutoComplete/>
+              <AutoCompleteComponent
+               setStatefromChild ={this.setStatefromChild}
+              />
             </div>
         );
     }
