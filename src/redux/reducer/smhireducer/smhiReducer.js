@@ -3,12 +3,11 @@ import { SEND_SMHI_REQUEST, SUCCESS_SMHI_REQUEST, FAILD_SMHI_REQUEST} from '../.
 
 
 
-
-
 const initialState ={
     sendRequestSmhi : '', 
     successRequestSmhi : '', 
-    failedRequestSmhi: ''
+    failedRequestSmhi: '', 
+    onprogress: ''
 }
 
 const smahiReducer =(state=initialState, action)=>{

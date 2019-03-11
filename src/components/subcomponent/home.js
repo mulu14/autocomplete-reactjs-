@@ -11,18 +11,17 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            placename: '',
             lat: '', 
             long: ''
 
         };
-        this.setStatefromChild = this.setStatefromChild.bind(this)
     }
 
    
-    setStatefromChild =()=>{
+    setStatefromChild =(placename)=>{
         this.setState({
-            
+          placename: placename, 
+        
         })
     }
 
@@ -30,7 +29,6 @@ class Home extends Component {
         return (
             <div>
               <AutoCompleteComponent
-               setStatefromChild ={this.setStatefromChild}
               />
             </div>
         );

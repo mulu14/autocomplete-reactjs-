@@ -1,23 +1,23 @@
-import { SEND_SMHI_REQUEST, SUCCESS_SMHI_REQUEST, FAILD_SMHI_REQUEST} from './actioncreator'
+import { SEND_SMHI_REQUEST, SUCCESS_SMHI_REQUEST, FAILD_SMHI_REQUEST} from './actiontype'
 
 
-export const sendSmhirequest = (data) =>{
+export const sendSmhirequest = () =>{
     return {
-        action: SEND_SMHI_REQUEST, 
-        data: data
+        type: SEND_SMHI_REQUEST, 
+    
     }
 }
 
 export const sendSmhisuccessrequest =(data)=>{
     return {
-        action: SUCCESS_SMHI_REQUEST, 
+        type: SUCCESS_SMHI_REQUEST, 
         data: data
     }
 }
 
 export const sendSmhifaildrequest =(data)=>{
     return {
-        action: FAILD_SMHI_REQUEST, 
+        type: FAILD_SMHI_REQUEST, 
         data: data
     }
 }
