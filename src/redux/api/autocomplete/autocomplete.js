@@ -9,12 +9,16 @@ const headers = {
     "Access-Control-Allow-Origin": "*"
 }
 
-
+const  jsUcfirst =(string)=>
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 const autocomplete= (name) => {
+
     return (dispatch) => {
-        dispatch(sendPlacerequest({name}))
-        return fetch("https://maps.googleapis.com/maps/api/place/autocomplete/xml?input="+name+"&types=geocode&&key=AIzaSyCa770mwmHoo5dowkYfoiC5mV8XKkK6SI0", {
+        dispatch(sendPlacerequest(jsUcfirst(name)))
+        return fetch("https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+jsUcfirst(name)+"&types=geocode&key=key", {
             method: "POST", 
             headers: {
                 "Content-Type": "application/json; charset=utf-8", 

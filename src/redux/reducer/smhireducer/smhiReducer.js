@@ -1,32 +1,55 @@
-import { SEND_SMHI_REQUEST, SUCCESS_SMHI_REQUEST, FAILD_SMHI_REQUEST} from '../../api/smhi/actiontype'
-
+import { SEND_SMHI_REQUESTCURRENT,
+     SUCCESS_SMHI_REQUESTCURRENT,
+      FAILD_SMHI_REQUESTCURRENT, 
+      SEND_SMHI_REQUEST_LASTYEAR, 
+      SUCCESS_SMHI_REQUESTLASTYEAR,
+      FAILD_SMHI_REQUESTLASTYEAR
+    } from '../../api/smhi/actiontype'
 
 
 
 const initialState ={
-    sendRequestSmhi : '', 
-    successRequestSmhi : '', 
-    failedRequestSmhi: '', 
+    sendRequestSmhicurrent : '', 
+    successRequestSmhicurrent : [], 
+    failedRequestSmhicurrent: '', 
+    sendRequestSmhilastyear : '', 
+    successRequestSmhilastyear : '', 
+    failedRequestSmhilastyear: '', 
     onprogress: ''
 }
 
 const smahiReducer =(state=initialState, action)=>{
     switch(action.type){
-       case SEND_SMHI_REQUEST: 
+       case SEND_SMHI_REQUESTCURRENT: 
        return {
            ...state, 
-           sendRequestSmhi: action.data
+           sendRequestSmhicurrent: action.data
        }
-       case SUCCESS_SMHI_REQUEST: 
+       case SUCCESS_SMHI_REQUESTCURRENT: 
        return {
            ...state, 
-           successRequestSmhi: action.data
+           successRequestSmhicurrent: action.data || []
        }
-       case FAILD_SMHI_REQUEST: 
+       case FAILD_SMHI_REQUESTCURRENT: 
        return {
            ...state, 
-           failedRequestSmhi: action.data
+           failedRequestSmhicurrent: action.data
        }
+       case SEND_SMHI_REQUEST_LASTYEAR: 
+       return {
+            ...state, 
+            sendRequestSmhilastyear: action.data
+       }
+       case SUCCESS_SMHI_REQUESTLASTYEAR: 
+       return {
+           ...state, 
+           sendRequestSmhicurrent: action.data
+       }
+       case FAILD_SMHI_REQUESTLASTYEAR: 
+        return {
+            ...state, 
+            failedRequestSmhilastyear: action.data
+        }
        default:
        return state
     }

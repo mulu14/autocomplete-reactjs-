@@ -1,23 +1,45 @@
-import {sendSmhirequest, sendSmhisuccessrequest, sendSmhifaildrequest} from './actioncreator'
+import {sendSmhirequestCurrent,
+     sendSmhisuccessrequestCurrent, 
+     sendSmhifaildrequestCurrent, 
+    } from './actioncreator'
 
 
-const url ="https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/16.158/lat/58.5812/data.json"; 
 
-
-const requestWeatherData =()=>{
+const requestWeatherData =(data)=>{
     return dispatch =>{
-        dispatch(sendSmhirequest())
-        return fetch(url, {
+        dispatch(sendSmhirequestCurrent())
+    return fetch(` https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${data.lon}/lat/${data.lat}/data.json`, {
             method: "GET"
         })
         .then(response =>response.json())
-        .then (data =>{
-            dispatch(sendSmhisuccessrequest(data))
+        .then(data =>{
+            dispatch(sendSmhisuccessrequestCurrent(data.timeSeries))
         })
         .catch(error =>{
-            dispatch(sendSmhifaildrequest(error))
+            dispatch(sendSmhifaildrequestCurrent(error))
         })
+    
     }
 }
 
 export default requestWeatherData; 
+
+/**
+ * // sendSmhirequestLastyear, 
+    // sendSmhisuccessrequestLastyear, 
+   //  sendSmhifaildrequestLastyear
+ * .then(()=>{
+            dispatch(sendSmhirequestLastyear())
+            return fetch(`https://opendata-download-metfcst.smhi.se/api/category/pm3g/version/{version}/geotype/multipoint/validtime/${data.current}/parameter/t/leveltype/${data.lon}/level/${data.lat}/data.json?with-geo=false&downsample=2`, {
+                method: "GET"
+            })
+            `https://opendata-download-metfcst.smhi.se/api/category/pm3g/version/{version}/geotype/multipoint/validtime/${data.current}/parameter/t/leveltype/${data.lon}/level/${data.lat}/data.json?with-geo=false&downsample=2`
+            .then(response => response.json())
+            .then(jsonlastyear =>{
+                dispatch(sendSmhisuccessrequestLastyear(jsonlastyear))
+            })
+            .catch(errorlastyear=>{
+            dispatch(sendSmhifaildrequestLastyear(errorlastyear))
+        })
+        })
+ *  */

@@ -12,6 +12,10 @@ const flexContainer = {
   flexDirection: 'row',
   padding: 0,
 };
+const stylecolor = {
+  color: 'white', 
+  textDecoration : 'none'
+}
 
 const NavbarComponent =()=> {
         return (
@@ -19,10 +23,10 @@ const NavbarComponent =()=> {
          <AppBar>
             <Toolbar>
               <List component="nav" style={flexContainer}>
-                 <ListItem><Link  to="/">Home </Link></ListItem>
-                 <ListItem> <Link  to="/about">About</Link></ListItem>
-                <ListItem> <Link  to="/contact">Contact</Link></ListItem>
-                <ListItem><Link to="/login" >Login </Link></ListItem>
+                 <ListItem><Link  to="/" style={stylecolor}> Home </Link></ListItem>
+                 <ListItem> <Link  to="/about" style={stylecolor}>About</Link></ListItem>
+                <ListItem> <Link  to="/contact" style={stylecolor}>Contact</Link></ListItem>
+                <ListItem><Link to="/login"style={stylecolor} >Login </Link></ListItem>
               </List>
             </Toolbar>         
         </AppBar> 

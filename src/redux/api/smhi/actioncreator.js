@@ -1,24 +1,48 @@
-import { SEND_SMHI_REQUEST, SUCCESS_SMHI_REQUEST, FAILD_SMHI_REQUEST} from './actiontype'
+import { SEND_SMHI_REQUESTCURRENT, 
+    SUCCESS_SMHI_REQUESTCURRENT,
+     FAILD_SMHI_REQUESTCURRENT, 
+     SEND_SMHI_REQUEST_LASTYEAR, 
+     SUCCESS_SMHI_REQUESTLASTYEAR,
+     FAILD_SMHI_REQUESTLASTYEAR
+
+    } from './actiontype'
 
 
-export const sendSmhirequest = () =>{
+export const sendSmhirequestCurrent = () =>{
     return {
-        type: SEND_SMHI_REQUEST, 
+        type: SEND_SMHI_REQUESTCURRENT, 
     
     }
 }
 
-export const sendSmhisuccessrequest =(data)=>{
+export const sendSmhisuccessrequestCurrent =(data)=>{
     return {
-        type: SUCCESS_SMHI_REQUEST, 
+        type: SUCCESS_SMHI_REQUESTCURRENT, 
         data: data
     }
 }
 
-export const sendSmhifaildrequest =(data)=>{
+export const sendSmhifaildrequestCurrent =(data)=>{
     return {
-        type: FAILD_SMHI_REQUEST, 
+        type: FAILD_SMHI_REQUESTCURRENT, 
         data: data
     }
 }
 
+export const sendSmhirequestLastyear =()=>{
+    return {
+        type: SEND_SMHI_REQUEST_LASTYEAR, 
+    }
+}
+export const sendSmhisuccessrequestLastyear =(data)=>{
+    return {
+        type: SUCCESS_SMHI_REQUESTLASTYEAR,
+        data: data
+    }
+}
+export const sendSmhifaildrequestLastyear=(data)=>{
+    return {
+        type: FAILD_SMHI_REQUESTLASTYEAR, 
+        data: data
+    }
+}

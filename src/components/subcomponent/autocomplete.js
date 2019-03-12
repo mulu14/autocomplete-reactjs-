@@ -1,96 +1,51 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
-import autocomplete from './../../redux/api/autocomplete/autocomplete'
-import  requestWeatherData from './../../redux/api/smhi/smhi'
+import React from 'react';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import TextField from '@material-ui/core/TextField';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 
 const style ={
     listStyle: 'none'
 }
-class AutoCompleteComponent extends Component {
-    constructor(props) {  
-        super(props) 
-        this.placeSuggestion = ['Uppsala', 'Stockholm', 'Malmo', 'Lund']; 
-        this.state = {
-            placename: '', 
-            lat: '', 
-            lng : '',
-            suggestionsList: []
-        }
-    }
-
-    componentDidMount(){
-        this.props.requestWeatherData()
-    }
-
+const AutoCompleteComponent =(props)=> {
     
-    handleChange =(e)=>{
-        const value = e.target.value; 
-       
-        let suggestions = []; 
-        if(value.length > 0){
-            const regex = new RegExp(`^${value}`, 'i')
-            suggestions = this.placeSuggestion.sort().filter(value=> regex.test(value)); 
-        }
-        this.setState({
-            ...this.state, 
-            suggestionsList: suggestions, 
-            placename: value
-        })
-    }
+const  renderSuggetion =()=>{
 
-    suggestedSelected =(value)=>{
-        this.setState({
-            placename: value, 
-            suggestionsList: []
-        })
-    }
-
-    renderSuggetion =()=>{
-
-        if(this.state.suggestionsList === 0){
+        if(props.suggestionsList === 0){
             return null; 
         }
         return (
             <ul>
-                {this.state.suggestionsList.map((place)=>
-                   <li key={place} onClick={()=>this.suggestedSelected(place)}>{place}</li>
+                {props.suggestionsList.map((place)=>
+                   <li key={place} onClick={()=>props.suggestedSelected(place)}>{place}</li>
                  )}
             </ul>
         )
-    }
-    render() {
+    }  
         return (
             <div>
-                <div>
-                 <form onSubmit={this.handleSubmit} style={style}>
-                    <li>
-                    <input 
-                      value={this.state.placename}
-                      onChange={this.handleChange}
+                <Card>
+                 <form onSubmit={props.handleSubmit} style={style}>
+                    <TextField 
+                      value={props.placename}
+                      name="placename"
+                      onChange={props.handleChange}
                       type="text"
-                      /></li>
-                    <li> <button>Search</button> </li>
+                      />
+                   <CardActions><Button type="submit">Search</Button> </CardActions>
                 </form>
-                </div>
-                <div>{this.renderSuggetion()}</div>
-                
+                </Card> 
+                <Card>
+                    <CardContent>
+                        {renderSuggetion()}
+                    </CardContent>
+                </Card>       
             </div>
         );
-    }
 }
 
-const mapStateToProps =state =>{
-    return{
-        onprogress : state.authcomplete.onprogress , 
-        
-    }
-}
-const mapDispatchToProps=dispatch=>{
-    return {
-      autocomplete: data =>dispatch(autocomplete(data)), 
-      requestWeatherData :() =>dispatch(requestWeatherData())
-    }
-} 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AutoCompleteComponent));
+
+export default AutoCompleteComponent;
+

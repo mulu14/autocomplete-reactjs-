@@ -4,7 +4,7 @@ import {SEND_PLACE_REQUEST, SUCCESS_PLACE_REQUEST, FAILD_PLACE_REQUEST, SEND_ON_
 
 const initialState = {
     sendRequest: '', 
-    successReuest: '', 
+    placesuggestion: [], 
     failedRequest: '',
     onprogress: ''
 }
@@ -25,7 +25,7 @@ const autoCompleteReducer =(state= initialState, action)=>{
         case SUCCESS_PLACE_REQUEST: 
         return {
             ...state, 
-            successReuest: action.data
+            placesuggestion: [...state.placesuggestion, action.data]
         }
         case FAILD_PLACE_REQUEST: 
         return {
