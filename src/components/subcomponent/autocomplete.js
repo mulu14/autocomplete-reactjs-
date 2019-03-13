@@ -1,51 +1,52 @@
-import React from 'react';
+import React from "react";
+/* global google */
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import TextField from '@material-ui/core/TextField';
 import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
+class Autocomplete extends React.Component {
+  constructor(props) {
+    super(props);
+    this.autocompleteInput = React.createRef();
+    this.autocomplete = null;
+    this.handlePlaceChanged = this.handlePlaceChanged.bind(this);
+  }
 
-const style ={
-    listStyle: 'none'
+  componentDidMount() {
+    this.autocomplete = new google.maps.places.Autocomplete(
+      this.autocompleteInput.current,
+      { types: ["geocode"] }
+    );
+    this.autocomplete.addListener("place_changed", this.handlePlaceChanged);
+  }
+
+  handlePlaceChanged() {
+    const place = this.autocomplete.getPlace();
+    const lat = this.autocomplete.getPlace().geometry.location.lat().toFixed(4);
+    const log = this.autocomplete.getPlace().geometry.location.lng().toFixed(3)
+    const data = Object.assign({
+      place: place, 
+      lat: lat, 
+      log: log
+    })
+    this.props.getStatefromChild(data);
+  }
+
+  render() {
+    return (
+      <Card>
+          <CardContent>
+            <input
+                ref={this.autocompleteInput}
+                id="autocomplete"
+                placeholder="Enter your address"
+                type="text"
+            />
+            </CardContent>
+            <CardActions><Button onClick={this.props.handleSubmit}>Search</Button></CardActions>
+      </Card>
+    );
+  }
 }
-const AutoCompleteComponent =(props)=> {
-    
-const  renderSuggetion =()=>{
 
-        if(props.suggestionsList === 0){
-            return null; 
-        }
-        return (
-            <ul>
-                {props.suggestionsList.map((place)=>
-                   <li key={place} onClick={()=>props.suggestedSelected(place)}>{place}</li>
-                 )}
-            </ul>
-        )
-    }  
-        return (
-            <div>
-                <Card>
-                 <form onSubmit={props.handleSubmit} style={style}>
-                    <TextField 
-                      value={props.placename}
-                      name="placename"
-                      onChange={props.handleChange}
-                      type="text"
-                      />
-                   <CardActions><Button type="submit">Search</Button> </CardActions>
-                </form>
-                </Card> 
-                <Card>
-                    <CardContent>
-                        {renderSuggetion()}
-                    </CardContent>
-                </Card>       
-            </div>
-        );
-}
-
-
-
-export default AutoCompleteComponent;
-
+export default Autocomplete;
