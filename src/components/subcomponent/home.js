@@ -70,7 +70,6 @@ class Home extends Component {
     }
     
     render() {
-        console.log(isEmpty(this.props.failedRequest))
         const renderData = ()=>{
             return (
                 <WeatherComponent
