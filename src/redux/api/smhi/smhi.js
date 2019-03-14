@@ -1,22 +1,22 @@
-import {sendSmhirequestCurrent,
-     sendSmhisuccessrequestCurrent, 
-     sendSmhifaildrequestCurrent, 
+import {sendSmhirequest,
+     sendSmhisuccessrequest, 
+     sendSmhifaildrequest, 
     } from './actioncreator'
 
 
 
 const requestWeatherData =(data)=>{
     return dispatch =>{
-        dispatch(sendSmhirequestCurrent())
-    return fetch(` https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${data.lon}/lat/${data.lat}/data.json`, {
+        dispatch(sendSmhirequest(data))
+    return fetch(` https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${data.log}/lat/${data.lat}/data.json`, {
             method: "GET"
         })
         .then(response =>response.json())
         .then(data =>{
-            dispatch(sendSmhisuccessrequestCurrent(data.timeSeries))
+            dispatch(sendSmhisuccessrequest(data.timeSeries))
         })
         .catch(error =>{
-            dispatch(sendSmhifaildrequestCurrent(error))
+            dispatch(sendSmhifaildrequest(error))
         })
     
     }

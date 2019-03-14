@@ -1,7 +1,7 @@
 import React from 'react'
 import Home from './../components/subcomponent/home'
-import About from './../components/subcomponent/placeholdercomponent/about'
-import Contact from './../components/subcomponent/placeholdercomponent/contact'
+import Note from './../components/subcomponent/placeholdercomponent/note'
+import Image from '../components/subcomponent/placeholdercomponent/image'
 import Login from './../components/subcomponent/placeholdercomponent/login'
 import { Switch, Route } from 'react-router'
 
@@ -9,8 +9,8 @@ const RouteComponent =()=>{
    return(
     <Switch>
         <Route exact path="/" component={Home}/>
-        <Route path="/about" component={About}/>
-        <Route path="/contact" component={Contact}/>
+        <Route path="/note" component={Note}/>
+        <Route path="/image" component={Image}/>
         <Route  path="/login"  component={Login}/>
      </Switch>
    )

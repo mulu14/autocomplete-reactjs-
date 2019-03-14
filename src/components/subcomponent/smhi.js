@@ -7,7 +7,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 
-
 const  WeatherComponent =(props)=>{
   const degreeTotext = (param)=>{
     let direction = 0; 
@@ -28,17 +27,18 @@ const  WeatherComponent =(props)=>{
 
   return (
     <Paper>
+       
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell align="right">Tempreatue</TableCell>
+            <TableCell align="right">Tempreatuer</TableCell>
             <TableCell align="right">Wind direction</TableCell>
             <TableCell align="right"> Wind speed</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
             <TableRow >
-              <TableCell align="right">{props.tempreatue() + " " + "Cel"} </TableCell>
+              <TableCell align="right">{props.tempreatuer() + " " + "Cel"} </TableCell>
               <TableCell align="right">{props.winddirection() + " " + degreeTotext(props.winddirection())}</TableCell>
               <TableCell align="right">{props.windspeed()+ " " + "m/s"}</TableCell>
             </TableRow>

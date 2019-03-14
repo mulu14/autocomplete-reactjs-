@@ -16,7 +16,6 @@ class App extends Component {
       spacing={40}
        >
        <Grid item xs={12}>
-      <h1>Hello world</h1>
       <NavbarComponent/>
        </Grid>
       <Grid item xs={8}>

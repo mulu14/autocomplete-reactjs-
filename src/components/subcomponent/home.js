@@ -4,8 +4,11 @@ import {withRouter} from 'react-router'
 import Autocomplet from './autocomplete'
 import WeatherComponent from './smhi'
 import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
 import requestWeatherData from './../../redux/api/smhi/smhi'
-
+import isEmpty from 'lodash/isEmpty'
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 
 class Home extends Component {
@@ -16,17 +19,24 @@ class Home extends Component {
             lat: '', 
             log: ''
         };
-        this.filterTempreatue = this.filterTempreatue.bind(this); 
+        this.filterTempreatuer= this.filterTempreatuer.bind(this); 
         this.filterWindDirection = this.filterWindDirection.bind(this); 
         this.filterwindSped = this.filterwindSpeed.bind(this); 
         this.getStatefromChild = this.getStatefromChild.bind(this)
+        this.returnCurrentDate = this.returnCurrentDate.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
+
+    returnCurrentDate =()=>{
+        if(this.props.weatherResponse.length >0){
+            return this.props.weatherResponse[0].validTime; 
+        }
+    }
    
-    filterTempreatue =()=>{
+    filterTempreatuer =()=>{
         if (this.props.weatherResponse.length > 0){
-           let tempreture =  this.props.weatherResponse[0].parameters.filter(data =>data.name ==="t")
-           return tempreture[0].values[0]; 
+           let tempreturer =  this.props.weatherResponse[0].parameters.filter(data =>data.name ==="t")
+           return tempreturer[0].values[0]; 
         }
     }
     filterWindDirection =()=>{
@@ -49,38 +59,47 @@ class Home extends Component {
              lat: data.lat, 
              log: data.log
         })
-
     }
 
     handleSubmit =(e)=>{
         const requestData = Object.assign({
-             lon: 16.158, 
-             lat: 58.5812
+             log: this.state.log.toFixed(3), 
+             lat: this.state.lat.toFixed(4)
         })
         this.props.requestWeatherData(requestData)
     }
     
     render() {
+        console.log(isEmpty(this.props.failedRequest))
         const renderData = ()=>{
             return (
                 <WeatherComponent
-                tempreatue= {this.filterTempreatue}
+                tempreatuer= {this.filterTempreatuer}
                 winddirection ={this.filterWindDirection}
                 windspeed= {this.filterwindSpeed}
                 />
             )
         }
+        const ErrorMessage = ()=>{
+            return(
+             <Paper>
+                <Typography>Sorry: You provide wrong address or having problem at getting data</Typography>
+            </Paper>
+            )      
+        }
         
         return (
             <div>
-               <Card>
+            <Card>
+             <CardHeader title={this.props.weatherResponse.length !== 0 && isEmpty(this.props.failedRequest)? this.returnCurrentDate() : null} />
               <Autocomplet
                getStatefromChild = {this.getStatefromChild}
                handleSubmit = {this.handleSubmit}
               />
               </Card>
               <Card>
-              {this.props.weatherResponse.length > 0? renderData():null}
+              {this.props.weatherResponse.length > 0 &&  isEmpty(this.props.failedRequest) ? renderData():null}
+              {!isEmpty(this.props.failedRequest)? ErrorMessage(): null}
               </Card>
             </div>
         );
@@ -88,7 +107,8 @@ class Home extends Component {
 }
 const mapStateToProps =state =>{
     return{
-        weatherResponse: state.weather.successRequestSmhicurrent || [], 
+        weatherResponse: state.weather.successRequest || [], 
+        failedRequest: state.weather.failedRequest || []
     }
 }
 const mapDispatchToProps=dispatch=>{

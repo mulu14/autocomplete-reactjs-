@@ -24,8 +24,8 @@ const NavbarComponent =()=> {
             <Toolbar>
               <List component="nav" style={flexContainer}>
                  <ListItem><Link  to="/" style={stylecolor}> Home </Link></ListItem>
-                 <ListItem> <Link  to="/about" style={stylecolor}>About</Link></ListItem>
-                <ListItem> <Link  to="/contact" style={stylecolor}>Contact</Link></ListItem>
+                 <ListItem> <Link  to="/note" style={stylecolor}>Note</Link></ListItem>
+                <ListItem> <Link  to="/image" style={stylecolor}>Image</Link></ListItem>
                 <ListItem><Link to="/login"style={stylecolor} >Login </Link></ListItem>
               </List>
             </Toolbar>         

@@ -22,8 +22,8 @@ class Autocomplete extends React.Component {
 
   handlePlaceChanged() {
     const place = this.autocomplete.getPlace();
-    const lat = this.autocomplete.getPlace().geometry.location.lat().toFixed(4);
-    const log = this.autocomplete.getPlace().geometry.location.lng().toFixed(3)
+    const lat = this.autocomplete.getPlace().geometry.location.lat();
+    const log = this.autocomplete.getPlace().geometry.location.lng(); 
     const data = Object.assign({
       place: place, 
       lat: lat, 
